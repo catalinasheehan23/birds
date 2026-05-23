@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
+  <meta charset="UTF-8" />
   <style>
     body {
       margin: 0;
@@ -10,15 +11,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .widget {
       width: 320px;
-      padding: 20px;
+      padding: 22px;
       border-radius: 24px;
       background: #fffaf4;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 30px rgba(80, 55, 40, 0.15);
       text-align: center;
     }
 
@@ -27,6 +28,7 @@
       height: 220px;
       object-fit: cover;
       border-radius: 18px;
+      background: #f3e7db;
     }
 
     h2 {
@@ -35,74 +37,120 @@
     }
 
     p {
-      margin: 0;
+      margin: 0 0 14px;
       font-size: 14px;
       opacity: 0.75;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      background: #d9b99b;
+      color: #3b2a20;
+      font-family: Georgia, serif;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #cfa987;
     }
   </style>
 </head>
 
 <body>
   <div class="widget">
-    <img id="birdImage" src="">
+    <img id="birdImage" alt="Bird of the day">
     <h2 id="birdName"></h2>
     <p>Bird of the Day</p>
+    <button onclick="newBird()">New Bird</button>
   </div>
 
   <script>
-    const birds = 
-  {
-    name: "Northern Cardinal",
-    image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Cardinalis_cardinalis_male_2.jpg"
-  },
-  {
-    name: "Blue Jay",
-    image: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Cyanocitta-cristata-004.jpg"
-  },
-  {
-    name: "American Robin",
-    image: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Turdus-migratorius-002.jpg"
-  },
-  {
-    name: "Barn Owl",
-    image: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Tyto_alba_close_up.jpg"
-  },
-  {
-    name: "Atlantic Puffin",
-    image: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Atlantic_Puffin_Fratercula_arctica.jpg"
-  },
-  {
-    name: "Scarlet Macaw",
-    image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Scarlet_Macaw_and_Blue-and-yellow_Macaw.jpg"
-  },
-  {
-    name: "Peacock",
-    image: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Peacock_Plumage.jpg"
-  },
-  {
-    name: "Flamingo",
-    image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Flamingos_Laguna_Colorada.jpg"
-  },
-  {
-    name: "Bald Eagle",
-    image: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Bald_Eagle_Portrait.jpg"
-  },
-  {
-    name: "Kingfisher",
-    image: "https://upload.wikimedia.org/wikipedia/commons/9/92/Common_Kingfisher_Alcedo_atthis.jpg"
-  }
-];
+    const birds = [
+      {
+        name: "Northern Cardinal",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cardinalis_cardinalis_male_2.jpg"
+      },
+      {
+        name: "Blue Jay",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Blue_Jay_%28Cyanocitta_cristata%29.jpg"
+      },
+      {
+        name: "American Robin",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/American_Robin.jpg"
+      },
+      {
+        name: "Barn Owl",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Tyto_alba_close_up.jpg"
+      },
+      {
+        name: "Atlantic Puffin",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Atlantic_Puffin_Fratercula_arctica.jpg"
+      },
+      {
+        name: "Scarlet Macaw",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ara_macao_-on_a_small_bicycle-8a.jpg"
+      },
+      {
+        name: "Peacock",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Peacock_Plumage.jpg"
+      },
+      {
+        name: "Flamingo",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Flamingos_Laguna_Colorada.jpg"
+      },
+      {
+        name: "Bald Eagle",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Bald_Eagle_Portrait.jpg"
+      },
+      {
+        name: "Common Kingfisher",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Common_Kingfisher_Alcedo_atthis.jpg"
+      },
+      {
+        name: "Snowy Owl",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Snowy_Owl.jpg"
+      },
+      {
+        name: "Mandarin Duck",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Mandarin.duck.arp.jpg"
+      },
+      {
+        name: "Ruby-throated Hummingbird",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ruby-throated_Hummingbird.jpg"
+      },
+      {
+        name: "American Goldfinch",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/American_Goldfinch.jpg"
+      },
+      {
+        name: "Roseate Spoonbill",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Roseate_Spoonbill.jpg"
+      }
+    ];
 
-    const today = new Date();
-    const start = new Date(today.getFullYear(), 0, 0);
-    const diff = today - start;
-    const oneDay = 1000 * 60 * 60 * 24;
-    const dayOfYear = Math.floor(diff / oneDay);
+    function showBird(index) {
+      const bird = birds[index];
+      document.getElementById("birdImage").src = bird.image;
+      document.getElementById("birdName").textContent = bird.name;
+    }
 
-    const bird = birds[dayOfYear % birds.length];
+    function birdOfTheDay() {
+      const today = new Date();
+      const start = new Date(today.getFullYear(), 0, 0);
+      const diff = today - start;
+      const day = Math.floor(diff / 86400000);
+      showBird(day % birds.length);
+    }
 
-    document.getElementById("birdImage").src = bird.image;
-    document.getElementById("birdName").textContent = bird.name;
+    function newBird() {
+      const randomIndex = Math.floor(Math.random() * birds.length);
+      showBird(randomIndex);
+    }
+
+    birdOfTheDay();
   </script>
 </body>
 </html>
